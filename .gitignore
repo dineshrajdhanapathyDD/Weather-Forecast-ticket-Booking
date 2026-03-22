@@ -1,0 +1,89 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# CDK
+infrastructure/cdk.out/
+infrastructure/node_modules/
+infrastructure/.cdk.staging/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# AWS
+.aws-sam/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment Variables (SECURITY CRITICAL)
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+
+# API Keys and Secrets (SECURITY CRITICAL)
+API_KEYS.md
+*.key
+*.pem
+secrets/
+.secrets/
+
+# Frontend
+frontend/node_modules/
+frontend/build/
+frontend/.env
+frontend/.env.local
+
+# Lambda Build Artifacts
+lambda/*/build/
+lambda/*/*.zip
+agent/build/
+agent/*.zip
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Temporary Files
+*.tmp
+*.temp
+.cache/
+
+# Backup Files
+*.bak
+*.backup
+*~
