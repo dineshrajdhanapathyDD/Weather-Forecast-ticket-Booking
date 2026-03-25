@@ -1,19 +1,19 @@
 version: 1
+appRoot: frontend
 frontend:
   phases:
     preBuild:
       commands:
-        - cd frontend && npm ci
+        - npm ci
     build:
       commands:
-        - cd frontend
         - echo "REACT_APP_API_ENDPOINT=$REACT_APP_API_ENDPOINT" > .env
         - cat .env
         - npm run build
   artifacts:
-    baseDirectory: frontend/build
+    baseDirectory: build
     files:
       - '**/*'
   cache:
     paths:
-      - frontend/node_modules/**/*
+      - node_modules/**/*
