@@ -30,8 +30,7 @@ const ChatInterface = () => {
     setLoading(true);
 
     try {
-      // Replace with your actual API endpoint
-      const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT || 'YOUR_API_ENDPOINT_HERE';
+      const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT || 'https://6rx3afsola.execute-api.us-east-2.amazonaws.com/prod';
       
       const response = await axios.post(`${API_ENDPOINT}/chat`, {
         message: userMessage

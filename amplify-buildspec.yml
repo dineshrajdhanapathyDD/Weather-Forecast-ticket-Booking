@@ -6,7 +6,10 @@ frontend:
         - cd frontend && npm ci
     build:
       commands:
-        - cd frontend && echo "REACT_APP_API_ENDPOINT=$REACT_APP_API_ENDPOINT" > .env && npm run build
+        - cd frontend
+        - echo "REACT_APP_API_ENDPOINT=$REACT_APP_API_ENDPOINT" > .env
+        - cat .env
+        - npm run build
   artifacts:
     baseDirectory: frontend/build
     files:
