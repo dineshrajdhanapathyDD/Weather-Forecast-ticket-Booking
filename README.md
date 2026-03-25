@@ -2,6 +2,17 @@
 
 An intelligent travel assistant powered by Amazon Nova that combines weather intelligence with flight fare trends to help travelers make safer, more comfortable, and cost-effective booking decisions.
 
+## 🌐 Live Demo
+
+🔗 **[Weather-Wise Flight Booking](https://main.d3ets75t767njn.amplifyapp.com)** — Hosted on AWS Amplify
+
+| Endpoint | URL |
+|----------|-----|
+| Frontend (Amplify) | `https://main.d3ets75t767njn.amplifyapp.com` |
+| API Gateway | `https://6rx3afsola.execute-api.us-east-2.amazonaws.com/prod/` |
+| Recommend API | `POST /recommend` |
+| Chat API | `POST /chat` |
+
 ## 🌟 Features
 
 - **Weather Intelligence**: Real-time weather forecasts and climate risk assessment
@@ -231,6 +242,21 @@ npm start
 
 The application will open at `http://localhost:3000`
 
+### Frontend Hosting (AWS Amplify)
+
+The frontend is deployed to AWS Amplify for a live demo:
+
+1. Go to [AWS Amplify Console](https://console.aws.amazon.com/amplify/)
+2. Connect your GitHub repository
+3. Set the build spec (use `amplify-buildspec.yml` in the repo root)
+4. Add environment variable: `REACT_APP_API_ENDPOINT=https://6rx3afsola.execute-api.us-east-2.amazonaws.com/prod`
+5. Deploy — Amplify auto-builds from the `main` branch
+
+Build spec highlights:
+- Installs frontend deps from `frontend/` directory
+- Injects the API endpoint via `.env` at build time
+- Outputs the React build from `frontend/build/`
+
 ## 🧪 Testing
 
 ### Unit Tests
@@ -379,4 +405,4 @@ For issues, questions, or contributions:
 
 **Built with ❤️ using Amazon Nova**
 
-Last Updated: March 13, 2026
+Last Updated: March 26, 2026
