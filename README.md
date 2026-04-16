@@ -4,12 +4,12 @@ An intelligent travel assistant powered by Amazon Nova that combines weather int
 
 ## 🌐 Live Demo
 
-🔗 **[Weather-Wise Flight Booking](https://main.d3ets75t767njn.amplifyapp.com)** — Hosted on AWS Amplify
+> **Note**: The live demo has been taken down to avoid AWS costs. Deploy your own instance using the instructions below.
 
-| Endpoint | URL |
-|----------|-----|
-| Frontend (Amplify) | `https://main.d3ets75t767njn.amplifyapp.com` |
-| API Gateway | `https://6rx3afsola.execute-api.us-east-2.amazonaws.com/prod/` |
+| Endpoint | URL (Example) |
+| -------- | ------------- |
+| Frontend (Amplify) | `https://<your-app-id>.amplifyapp.com` |
+| API Gateway | `https://<your-api-id>.execute-api.us-east-2.amazonaws.com/prod/` |
 | Recommend API | `POST /recommend` |
 | Chat API | `POST /chat` |
 
@@ -244,15 +244,16 @@ The application will open at `http://localhost:3000`
 
 ### Frontend Hosting (AWS Amplify)
 
-The frontend is deployed to AWS Amplify for a live demo:
+The frontend can be deployed to AWS Amplify for a live demo:
 
 1. Go to [AWS Amplify Console](https://console.aws.amazon.com/amplify/)
 2. Connect your GitHub repository
 3. Set the build spec (use `amplify-buildspec.yml` in the repo root)
-4. Add environment variable: `REACT_APP_API_ENDPOINT=https://6rx3afsola.execute-api.us-east-2.amazonaws.com/prod`
+4. Add environment variable: `REACT_APP_API_ENDPOINT=https://<your-api-id>.execute-api.us-east-2.amazonaws.com/prod`
 5. Deploy — Amplify auto-builds from the `main` branch
 
 Build spec highlights:
+
 - Installs frontend deps from `frontend/` directory
 - Injects the API endpoint via `.env` at build time
 - Outputs the React build from `frontend/build/`
@@ -374,6 +375,54 @@ aws logs tail /aws/lambda/weather-wise-recommendation --follow --region us-east-
 - **TypeScript**: Follow AWS CDK best practices
 - **JavaScript**: Use ESLint with React configuration
 
+## 🗑️ Cleanup / Delete All AWS Resources
+
+To tear down all deployed resources and avoid ongoing charges:
+
+### 1. Destroy the CDK Stack
+
+```bash
+cd infrastructure
+cdk destroy --force
+```
+
+This removes Lambda functions, API Gateway, IAM roles, and CloudWatch resources. S3 and DynamoDB have RETAIN policies and must be deleted manually.
+
+### 2. Delete Retained Resources
+
+```bash
+# Delete S3 bucket (empties it first)
+aws s3 rb s3://weather-wise-historical-data --force --region us-east-2
+
+# Delete DynamoDB table
+aws dynamodb delete-table --table-name weather-wise-queries --region us-east-2
+```
+
+### 3. Delete CloudWatch Log Groups
+
+```bash
+aws logs delete-log-group --log-group-name /aws/lambda/weather-wise-weather-tool --region us-east-2
+aws logs delete-log-group --log-group-name /aws/lambda/weather-wise-fare-tool --region us-east-2
+aws logs delete-log-group --log-group-name /aws/lambda/weather-wise-recommendation --region us-east-2
+aws logs delete-log-group --log-group-name /aws/lambda/weather-wise-bedrock-agent --region us-east-2
+```
+
+### 4. Delete Amplify App (if deployed)
+
+```bash
+aws amplify delete-app --app-id <your-app-id> --region us-east-2
+```
+
+Or delete it from the [Amplify Console](https://console.aws.amazon.com/amplify/) UI.
+
+### 5. (Optional) Remove CDK Bootstrap
+
+```bash
+aws cloudformation delete-stack --stack-name CDKToolkit --region us-east-2
+```
+
+> **Warning**: Only do this if no other CDK apps use this bootstrap in us-east-2.
+
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -404,5 +453,5 @@ For issues, questions, or contributions:
 ---
 
 **Built with ❤️ using Amazon Nova**
-
+created by **Dineshraj Dhanapathy**
 Last Updated: March 26, 2026
